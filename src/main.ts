@@ -1,53 +1,14 @@
-import 'vue/jsx'
-
-// 引入unocss
-import '@/plugins/unocss'
-
-// 导入全局的svg图标
-import '@/plugins/svgIcon'
-
-// 初始化多语言
-import { setupI18n } from '@/plugins/vueI18n'
-
-// 引入状态管理
-import { setupStore } from '@/store'
-
-// 全局组件
-import { setupGlobCom } from '@/components'
-
-// 引入element-plus
-import { setupElementPlus } from '@/plugins/elementPlus'
-
-// 引入全局样式
-import '@/styles/index.less'
-
-// 引入动画
-import '@/plugins/animate.css'
-
-// 路由
-import { setupRouter } from './router'
+import './assets/main.css'
 
 import { createApp } from 'vue'
+import { createPinia } from 'pinia'
 
 import App from './App.vue'
+import router from './router'
 
-import './permission'
+const app = createApp(App)
 
-// 创建实例
-const setupAll = async () => {
-  const app = createApp(App)
+app.use(createPinia())
+app.use(router)
 
-  await setupI18n(app)
-
-  setupStore(app)
-
-  setupGlobCom(app)
-
-  setupElementPlus(app)
-
-  setupRouter(app)
-
-  app.mount('#app')
-}
-
-setupAll()
+app.mount('#app')
